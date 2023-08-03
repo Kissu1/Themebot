@@ -1,15 +1,15 @@
 version: '3'
 services:
 
-  postgres:
+  mysql:
     volumes:
-      - "postgres-data:/data/postgres"
+      - "mysql-data:/data/mysql"
     env_file:
-      - docker-compose.prod.postgres.env
+      - docker-compose.prod.mysql.env
 
   bot:
     env_file:
       - docker-compose.prod.bot.env
 
 volumes:
-  postgres-data:
+  mysql-data:

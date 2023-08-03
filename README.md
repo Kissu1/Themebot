@@ -74,11 +74,11 @@ cp .example.bot.env .env
 ```bash
 # development
 cp .example.bot.env docker-compose.dev.bot.env
-cp .example.postgres.env docker-compose.dev.postgres.env
+cp .example.mysql.env docker-compose.dev.mysql.env
 
 # production
 cp .example.bot.env docker-compose.prod.bot.env
-cp .example.postgres.env docker-compose.prod.postgres.env
+cp .example.mysql.env docker-compose.prod.mysql.env
 ```
 
 2.  Edit [environment variables](#environment-variables-reference) in `docker-compose.dev.bot.env` and `docker-compose.prod.bot.env`

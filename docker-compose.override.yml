@@ -1,13 +1,13 @@
 version: '3'
 services:
 
-  postgres:
+  mysql:
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - "postgres-data-dev:/data/postgres"
+      - "mysql-data-dev:/data/mysql"
     env_file:
-      - docker-compose.dev.postgres.env
+      - docker-compose.dev.mysql.env
 
   redis:
     ports:
@@ -23,4 +23,4 @@ services:
     command: npm run dev
 
 volumes:
-  postgres-data-dev:
+  mysql-data-dev:
