@@ -50,6 +50,10 @@ Follow these steps to set up and run your bot using this template:
     ```bash
     npm install
     ```
+    Run migrations:
+    ```bash
+    npx prisma migrate dev
+    ```
     Start the bot in watch mode (auto-reload when code changes):
     ```bash
     npm run dev
@@ -68,6 +72,11 @@ Follow these steps to set up and run your bot using this template:
     BOT_WEBHOOK=<your_webhook_url>
     ```
     
+    Run migrations:
+    ```bash
+    npx prisma migrate deploy
+    ```
+
     Start the bot in production mode:
     ```bash
     npm start
@@ -258,6 +267,15 @@ git merge template/example/webapp-vue -X theirs --squash --no-commit --allow-unr
     </td>
     <td>
         Telegram Bot API token obtained from <a href="https://t.me/BotFather">@BotFather</a>.
+    </td>
+  </tr>
+  <tr>
+    <td>DATABASE_URL</td>
+    <td>
+        String
+    </td>
+    <td>
+        Database connection.
     </td>
   </tr>
     <tr>

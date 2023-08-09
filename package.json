@@ -25,6 +25,7 @@
     "@grammyjs/i18n": "1.0.1",
     "@grammyjs/parse-mode": "1.8.1",
     "@grammyjs/types": "3.3.0",
+    "@prisma/client": "5.5.2",
     "callback-data": "1.1.1",
     "dotenv": "16.3.1",
     "fastify": "4.24.3",
@@ -54,6 +55,7 @@
     "prettier": "3.0.3",
     "prettier-plugin-organize-imports": "3.2.3",
     "tsc-watch": "6.0.4",
+    "prisma": "5.5.2",
     "typescript": "5.2.2"
   },
   "engines": {
