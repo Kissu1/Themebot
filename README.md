@@ -55,24 +55,12 @@ Follow these steps to set up and run your bot using this template:
     npm run dev
     ```
 
-   **Production Mode:**
+    **Production Mode:**
     
-    Install only production dependencies (no development dependencies):
-    ```bash
-    npm install --only=prod
+    [Deploy to Vercel](https://vercel.com/new) and set up a webhook to connect your Vercel app with Telegram.  
+    Modify the below URL to your credentials and visit it from your browser:
     ```
-    
-    Set the `NODE_ENV` environment variable to "production" in your `.env` file. Also, make sure to update `BOT_WEBHOOK` with the actual URL where your bot will receive updates.
-    ```dotenv
-    NODE_ENV=production
-    BOT_WEBHOOK=<your_webhook_url>
-    ```
-    
-    Start the bot in production mode:
-    ```bash
-    npm start
-    # or
-    npm run start:force # if you want to skip type checking
+    https://APP_NAME.vercel.app/BOT_TOKEN
     ```
 
 ### List of Available Commands
