@@ -1,45 +1,40 @@
 #!/usr/bin/env tsx
 
 import { onShutdown } from "node-graceful-shutdown";
-import { createBot } from "#root/bot/index.js";
+import { Bot, createBot } from "#root/bot/index.js";
 import { config } from "#root/config.js";
 import { logger } from "#root/logger.js";
 import { createServer } from "#root/server/index.js";
 
 try {
-  const bot = createBot(config.BOT_TOKEN);
-  const server = await createServer(bot);
+  const bots = new Map<string, Bot>();
+  const server = await createServer({
+    getBot: async (token) => {
+      if (bots.has(token)) {
+        return bots.get(token) as Bot;
+      }
+
+      const bot = createBot(token);
+      await bot.init();
+
+      bots.set(token, bot);
+
+      return bot;
+    },
+  });
 
   // Graceful shutdown
   onShutdown(async () => {
     logger.info("shutdown");
 
     await server.close();
-    await bot.stop();
+    await Promise.all(Object.values(bots).map((bot: Bot) => bot.stop()));
   });
 
-  if (config.isProd) {
-    // to prevent receiving updates before the bot is ready
-    await bot.init();
-
-    await server.listen({
-      host: config.BOT_SERVER_HOST,
-      port: config.BOT_SERVER_PORT,
-    });
-
-    await bot.api.setWebhook(config.BOT_WEBHOOK, {
-      allowed_updates: config.BOT_ALLOWED_UPDATES,
-    });
-  } else if (config.isDev) {
-    await bot.start({
-      allowed_updates: config.BOT_ALLOWED_UPDATES,
-      onStart: ({ username }) =>
-        logger.info({
-          msg: "bot running...",
-          username,
-        }),
-    });
-  }
+  await server.listen({
+    host: config.BOT_SERVER_HOST,
+    port: config.BOT_SERVER_PORT,
+  });
 } catch (error) {
   logger.error(error);
   process.exit(1);

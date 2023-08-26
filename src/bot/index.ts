@@ -45,6 +45,11 @@ export function createBot(token: string, options: Options = {}) {
     session({
       initial: () => ({}),
       storage: sessionStorage,
+      getSessionKey(ctx: Omit<Context, "session">) {
+        return ctx.chat === undefined || ctx.me === undefined
+          ? undefined
+          : `${ctx.me.id}/${ctx.chat.id}/`;
+      },
     }),
   );
   bot.use(i18n);
